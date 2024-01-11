@@ -2,6 +2,9 @@
 # File: 100-safe_first_element.py
 # Author: Oluwatobiloba Light
 # Augments the following code with the correct duck-typed annotations
+"""
+Safe first element module
+"""
 
 
 from typing import Any, Sequence, Union
