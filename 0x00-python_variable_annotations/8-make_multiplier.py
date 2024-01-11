@@ -16,7 +16,7 @@ def make_multiplier(multiplier: float) -> Callable[[float], float]:
     """
     Returns a function that multiplies a float.
     """
-    def wrapper(value: float = multiplier) -> float:
-        return value * value
+    def wrapper(multiplier: float) -> float:
+        return multiplier * multiplier
 
     return wrapper
