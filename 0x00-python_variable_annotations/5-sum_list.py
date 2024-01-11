@@ -8,7 +8,10 @@ Sum list module
 """
 
 
-def sum_list(input_list: list) -> float:
+from typing import List
+
+
+def sum_list(input_list: List[float]) -> float:
     """
     Returns their sum as a float.
     """
