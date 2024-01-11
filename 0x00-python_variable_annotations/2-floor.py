@@ -6,11 +6,10 @@
 """
 Floor module
 """
-import math
-
 
 def floor(n: float) -> float:
     """
     Returns the floor of the float.
     """
+    import math
     return math.floor(n)
