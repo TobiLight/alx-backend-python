@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 # File: 0-add.py
 # Author: Oluwatobiloba Light
 # A type-annotated function add that takes a float a and a float b as
