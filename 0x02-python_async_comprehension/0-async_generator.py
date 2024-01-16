@@ -5,7 +5,6 @@
 
 import asyncio
 from random import uniform
-import random
 from typing import Generator
 
 
