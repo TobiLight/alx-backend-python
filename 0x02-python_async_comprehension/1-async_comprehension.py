@@ -3,13 +3,14 @@
 # Author: Oluwatobiloba Light
 """Task 1 module"""
 
-from typing import Generator
+
+from typing import List
 
 
 async_generator = __import__('0-async_generator').async_generator
 
 
-async def async_comprehension() -> Generator[float, None, None]:
+async def async_comprehension() -> List[float]:
     """
     Creates a list of 10 numbers from a 10-number generator.
     """
