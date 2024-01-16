@@ -4,7 +4,7 @@
 """Task 0 module"""
 
 import asyncio
-from random import randint, uniform
+from random import random
 
 
 async def async_generator():
@@ -13,4 +13,4 @@ async def async_generator():
     """
     for _ in range(10):
         await asyncio.sleep(1)
-        yield randint(0, 10)
+        yield random() * 10
