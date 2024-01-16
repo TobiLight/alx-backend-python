@@ -4,13 +4,15 @@
 """Task 0 module"""
 
 import asyncio
-from random import random
+from random import uniform
+import random
+from typing import Generator
 
 
-async def async_generator():
+async def async_generator() -> Generator[float, None, None]:
     """
     An asynchronous generator coroutine that yields random numbers.
     """
     for _ in range(10):
         await asyncio.sleep(1)
-        yield random() * 10
+        yield random.random() * 10
