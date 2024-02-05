@@ -67,12 +67,12 @@ class TestMemoize(unittest.TestCase):
                 """a_property method"""
                 return self.a_method()
 
-        with patch.object(TestClass, "a_method", return_value=lambda: 42) as\
-                mock_method:
+        with patch.object(TestClass, "a_method") as mock_method:
+            mock_method.return_value = 42
             test = TestClass()
 
-            instance1 = test.a_property()
-            instance2 = test.a_property()
+            instance1 = test.a_property
+            instance2 = test.a_property
 
             self.assertEqual(instance1, 42)
             self.assertEqual(instance2, 42)
