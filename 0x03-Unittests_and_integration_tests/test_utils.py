@@ -38,8 +38,8 @@ class TestAccessNestedMap(unittest.TestCase):
 class TestGetJSON(unittest.TestCase):
     """Test GetJSON method"""
     @parameterized.expand([
-        ("http://example.com", {'payload': True}),
-        ("http://holberton.io", {'payload': False})
+        ('http://example.com', {'payload': True}),
+        ('http://holberton.io', {'payload': False})
     ])
     def test_get_json(self, test_url: str, payload: Dict) -> None:
         """Tests that utils.get_json returns the expected result."""
