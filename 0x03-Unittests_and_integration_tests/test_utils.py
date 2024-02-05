@@ -56,7 +56,8 @@ class TestMemoize(unittest.TestCase):
     def test_memoize(self):
         """Tests that utils.memoize memoizes a result"""
         class TestClass:
-            """Test class"""
+            """Test class doc"""
+
             def a_method(self):
                 """a_method method"""
                 return 42
