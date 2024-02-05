@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # File:test_utils.py
 # Author: Oluwatobiloba Light
-from typing import Dict
+from typing import Any, Dict
 import unittest
 from parameterized import parameterized
 from utils import access_nested_map, get_json
