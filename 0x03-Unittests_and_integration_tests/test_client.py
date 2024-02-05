@@ -10,9 +10,7 @@ from client import GithubOrgClient
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """
-    Test utils.GithubOrgClient
-    """
+    """Test utils.GithubOrgClient"""
 
     @parameterized.expand([
         ("google",),
