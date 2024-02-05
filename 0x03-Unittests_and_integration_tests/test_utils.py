@@ -33,7 +33,7 @@ class TestAccessNestedMap(unittest.TestCase):
         self.assertEqual(exception_message, str(expected))
 
 
-class TestGetJSON(unittest.TestCase):
+class TestGetJson(unittest.TestCase):
     """Test GetJSON method."""
 
     @parameterized.expand([
