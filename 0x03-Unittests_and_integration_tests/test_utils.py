@@ -6,7 +6,7 @@
 import unittest
 from parameterized import parameterized
 from utils import access_nested_map, get_json
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -36,11 +36,11 @@ class TestAccessNestedMap(unittest.TestCase):
 
 class TestGetJSON(unittest.TestCase):
     """Test GetJSON method"""
+    @patch("utils.requests.get")
     @parameterized.expand([
         ("http://example.com", {'payload': True}),
         ("http://holberton.io", {'payload': False})
     ])
-    @patch("utils.requests.get")
     def test_get_json(self, test_url, payload, mock_get):
         """Tests that utils.get_json returns the expected result."""
         mock_get.return_value.json.return_value = payload
