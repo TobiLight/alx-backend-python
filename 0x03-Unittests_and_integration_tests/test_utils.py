@@ -3,6 +3,7 @@
 # Author: Oluwatobiloba Light
 
 
+from typing import Dict
 import unittest
 from parameterized import parameterized
 from utils import access_nested_map, get_json
@@ -40,11 +41,11 @@ class TestGetJSON(unittest.TestCase):
         ("http://example.com", {'payload': True}),
         ("http://holberton.io", {'payload': False})
     ])
-    @patch("utils.requests.get")
-    def test_get_json(self, test_url, payload, mock_get):
+    def test_get_json(self, test_url: str, payload: Dict) -> None:
         """Tests that utils.get_json returns the expected result."""
-        mock_get.return_value.json.return_value = payload
-        result = get_json(test_url)
-
-        mock_get.assert_called_once_with(test_url)
-        self.assertEqual(result, payload)
+        json_return = {'json.return_value': payload}
+        with patch('utils.requests.get', return_value=Mock(**json_return)) as\
+                mock_get:
+            result = get_json(test_url)
+            mock_get.assert_called_once_with(test_url)
+            self.assertEqual(result, payload)
