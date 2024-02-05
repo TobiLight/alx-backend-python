@@ -50,28 +50,53 @@ class TestGetJson(unittest.TestCase):
             mock_get.assert_called_once_with(test_url)
 
 
+# class TestMemoize(unittest.TestCase):
+#     """Tests utils.memoize method"""
+
+#     def test_memoize(self) -> None:
+#         """Tests that utils.memoize memoizes a result"""
+#         class TestClass:
+#             """Test class doc"""
+
+#             def a_method(self) -> int:
+#                 """a_method method"""
+#                 return 42
+
+#             @memoize
+#             def a_property(self) -> int:
+#                 """a_property method"""
+#                 return self.a_method()
+
+#         with patch.object(TestClass, "a_method", return_value=lambda: 42) as\
+#                 mock_method:
+#             test = TestClass()
+
+#             instance1 = test.a_property()
+#             instance2 = test.a_property()
+
+#             self.assertEqual(instance1, 42)
+#             self.assertEqual(instance2, 42)
+
+#             mock_method.assert_called_once()
+
 class TestMemoize(unittest.TestCase):
-    """Tests utils.memoize method"""
+    """Tests the `memoize` function."""
 
     def test_memoize(self) -> None:
-        """Tests that utils.memoize memoizes a result"""
+        """Tests `memoize`'s output."""
         class TestClass:
-            """Test class doc"""
-
-            def a_method(self) -> int:
-                """a_method method"""
+            def a_method(self):
                 return 42
 
             @memoize
-            def a_property(self) -> int:
-                """a_property method"""
+            def a_property(self):
                 return self.a_method()
-
-        with patch.object(TestClass, "a_method", return_value=lambda: 42) as\
-                mock_method:
-            test = TestClass()
-            instance1 = test.a_property()
-            instance2 = test.a_property()
-            self.assertEqual(instance1, 42)
-            self.assertEqual(instance2, 42)
-            mock_method.assert_called_once()
+        with patch.object(
+                TestClass,
+                "a_method",
+                return_value=lambda: 42,
+        ) as memo_fxn:
+            test_class = TestClass()
+            self.assertEqual(test_class.a_property(), 42)
+            self.assertEqual(test_class.a_property(), 42)
+            memo_fxn.assert_called_once()
