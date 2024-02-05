@@ -7,7 +7,7 @@ from typing import Dict
 import unittest
 from parameterized import parameterized
 from utils import access_nested_map, get_json
-from unittest.mock import MagicMock, Mock, patch
+from unittest.mock import Mock, patch
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -46,6 +46,5 @@ class TestGetJSON(unittest.TestCase):
         json_return = {'json.return_value': payload}
         with patch('utils.requests.get', return_value=Mock(**json_return)) as\
                 mock_get:
-            result = get_json(test_url)
             mock_get.assert_called_once_with(test_url)
-            self.assertEqual(result, payload)
+            self.assertEqual(get_json(test_url), payload)
