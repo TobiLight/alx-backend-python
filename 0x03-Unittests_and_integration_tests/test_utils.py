@@ -57,10 +57,12 @@ class TestMemoize(unittest.TestCase):
         """Test memoize"""
         class TestClass:
             def a_method(self):
+                """a_method method"""
                 return 42
 
             @memoize
             def a_property(self):
+                """a_property method"""
                 return self.a_method()
 
         with patch.object(TestClass, "a_method", return_value=42) as\
