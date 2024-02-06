@@ -39,8 +39,8 @@ class TestGithubOrgClient(unittest.TestCase):
                              mock_result.return_value["repos_url"])
 
     @patch("client.get_json", return_value={
-        'name': 'google',
-        'name': 'abc'
+        'name': 'repo1',
+        'name': 'repo2'
     })
     def test_public_repos(self, mock_json: Mock) -> None:
         """
@@ -52,6 +52,6 @@ class TestGithubOrgClient(unittest.TestCase):
                    return_value="https://api.github.com/orgs/google/repos")\
                 as mock_result:
             github_client = GithubOrgClient("google").public_repos()
-            self.assertEqual(github_client, ["google", "abc"])
+            self.assertEqual(github_client, ["repo1", "repo2"])
             mock_json.assert_called_once()
             mock_result.assert_called_once()
