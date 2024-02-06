@@ -38,20 +38,57 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(github_client._public_repos_url,
                              mock_result.return_value["repos_url"])
 
-    @patch("client.get_json", return_value={
-        'name': 'repo1',
-        'name': 'repo2'
-    })
+    @patch("client.get_json")
     def test_public_repos(self, mock_json: Mock) -> None:
         """
         Tests that the list of repos is what you expect from the chosen
         payload.
         """
+        test_payload = {
+            'repos_url': "https://api.github.com/users/google/repos",
+            'repos': [
+                {
+                    "id": 7697149,
+                    "name": "episodes.dart",
+                    "private": False,
+                    "owner": {
+                        "login": "google",
+                        "id": 1342004,
+                    },
+                    "fork": False,
+                    "url": "https://api.github.com/repos/google/episodes.dart",
+                    "created_at": "2013-01-19T00:31:37Z",
+                    "updated_at": "2019-09-23T11:53:58Z",
+                    "has_issues": True,
+                    "forks": 22,
+                    "default_branch": "master",
+                },
+                {
+                    "id": 8566972,
+                    "name": "kratu",
+                    "private": False,
+                    "owner": {
+                        "login": "google",
+                        "id": 1342004,
+                    },
+                    "fork": False,
+                    "url": "https://api.github.com/repos/google/kratu",
+                    "created_at": "2013-03-04T22:52:33Z",
+                    "updated_at": "2019-11-15T22:22:16Z",
+                    "has_issues": True,
+                    "forks": 32,
+                    "default_branch": "master",
+                },
+            ]
+        }
+        mock_json.return_value = test_payload['repos']
         with patch("client.GithubOrgClient._public_repos_url",
-                   new_callable=PropertyMock,
-                   return_value="https://api.github.com/orgs/google/repos")\
-                as mock_result:
+                   new_callable=PropertyMock) as mock_result:
+            mock_result.return_value = test_payload["repos_url"]
             github_client = GithubOrgClient("google").public_repos()
-            self.assertEqual(github_client, ["repo1", "repo2"])
-            mock_json.assert_called_once()
+            self.assertEqual(github_client, [
+                "episodes.dart",
+                "kratu",
+            ])
             mock_result.assert_called_once()
+            mock_json.assert_called_once()
