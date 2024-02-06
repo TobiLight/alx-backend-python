@@ -118,11 +118,11 @@ class TestGithubOrgClient(unittest.TestCase):
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """Performs integration tests for the `GithubOrgClient` class."""
     @classmethod
-    def setUpClass(cls) -> None:
+    def setUpClass(cls, pc) -> None:
         """Sets up class fixtures before running tests."""
         route_payload = {
-            'https://api.github.com/orgs/google': cls.org_payload,
-            'https://api.github.com/orgs/google/repos': cls.repos_payload,
+            'https://api.github.com/orgs/google': pc.org_payload,
+            'https://api.github.com/orgs/google/repos': pc.repos_payload,
         }
 
         def get_payload(url):
@@ -133,18 +133,18 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.get_patcher = patch("requests.get", side_effect=get_payload)
         cls.get_patcher.start()
 
-    def test_public_repos(self) -> None:
+    def test_public_repos(self, pc) -> None:
         """Tests the `public_repos` method."""
         self.assertEqual(
             GithubOrgClient("google").public_repos(),
-            self.expected_repos,
+            pc.expected_repos,
         )
 
-    def test_public_repos_with_license(self) -> None:
+    def test_public_repos_with_license(self, pc) -> None:
         """Tests the `public_repos` method with a license."""
         self.assertEqual(
             GithubOrgClient("google").public_repos(license="apache-2.0"),
-            self.apache2_repos,
+            pc.apache2_repos,
         )
 
     @classmethod
