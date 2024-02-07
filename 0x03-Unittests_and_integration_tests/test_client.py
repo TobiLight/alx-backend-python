@@ -94,7 +94,7 @@ class TestGithubOrgClient(unittest.TestCase):
                 "kratu",
             ])
             mock_result.assert_called_once()
-        mock_json.assert_called_once()
+            mock_json.assert_called_once()
 
     @parameterized.expand([
         ({'license': {'key': "bsd-3-clause"}}, "bsd-3-clause", True),
@@ -118,11 +118,11 @@ class TestGithubOrgClient(unittest.TestCase):
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """Performs integration tests for the `GithubOrgClient` class."""
     @classmethod
-    def setUpClass(cls, pc) -> None:
+    def setUpClass(cls) -> None:
         """Sets up class fixtures before running tests."""
         route_payload = {
-            'https://api.github.com/orgs/google': pc.org_payload,
-            'https://api.github.com/orgs/google/repos': pc.repos_payload,
+            'https://api.github.com/orgs/google': cls.org_payload,
+            'https://api.github.com/orgs/google/repos': cls.repos_payload,
         }
 
         def get_payload(url):
@@ -133,18 +133,18 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.get_patcher = patch("requests.get", side_effect=get_payload)
         cls.get_patcher.start()
 
-    def test_public_repos(self, pc) -> None:
+    def test_public_repos(self) -> None:
         """Tests the `public_repos` method."""
         self.assertEqual(
             GithubOrgClient("google").public_repos(),
-            pc.expected_repos,
+            self.expected_repos,
         )
 
-    def test_public_repos_with_license(self, pc) -> None:
+    def test_public_repos_with_license(self) -> None:
         """Tests the `public_repos` method with a license."""
         self.assertEqual(
             GithubOrgClient("google").public_repos(license="apache-2.0"),
-            pc.apache2_repos,
+            self.apache2_repos,
         )
 
     @classmethod
