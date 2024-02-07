@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # File:test_utils.py
 # Author: Oluwatobiloba Light
+"""Test utils module"""
 
 
 from typing import Any, Dict
