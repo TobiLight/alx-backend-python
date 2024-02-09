@@ -39,7 +39,7 @@ class TestGithubOrgClient(unittest.TestCase):
                 as mock_result:
             github_client = GithubOrgClient("google")
             self.assertEqual(github_client._public_repos_url,
-                             'https://api.github.com/orgs/google/repos')
+                             mock_result.return_value['repos_url'])
 
     @patch("client.get_json")
     def test_public_repos(self, mock_json: MagicMock) -> None:
