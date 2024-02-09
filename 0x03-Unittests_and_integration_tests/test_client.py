@@ -39,7 +39,7 @@ class TestGithubOrgClient(unittest.TestCase):
                 as mock_result:
             github_client = GithubOrgClient("google")
             self.assertEqual(github_client._public_repos_url,
-                             mock_result.return_value)
+                             mock_result.return_value['repos_url'])
 
     @patch("client.get_json")
     def test_public_repos(self, mock_json: MagicMock) -> None:
@@ -89,6 +89,7 @@ class TestGithubOrgClient(unittest.TestCase):
                    new_callable=PropertyMock) as mock_result:
             mock_result.return_value = test_payload["repos_url"]
             github_client = GithubOrgClient("google")
+            print(github_client.public_repos())
             self.assertEqual(github_client.public_repos(), [
                 "episodes.dart",
                 "kratu",
