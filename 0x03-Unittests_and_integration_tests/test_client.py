@@ -5,7 +5,7 @@
 
 from typing import Dict
 import unittest
-from unittest.mock import Mock, PropertyMock, patch
+from unittest.mock import MagicMock, Mock, PropertyMock, patch
 from parameterized import parameterized, parameterized_class
 from requests import HTTPError
 from client import GithubOrgClient
@@ -42,7 +42,7 @@ class TestGithubOrgClient(unittest.TestCase):
                              mock_result.return_value)
 
     @patch("client.get_json")
-    def test_public_repos(self, mock_json: Mock) -> None:
+    def test_public_repos(self, mock_json: MagicMock) -> None:
         """
         Tests that the list of repos is what you expect from the chosen
         payload.
