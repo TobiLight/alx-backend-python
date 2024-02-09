@@ -93,7 +93,7 @@ class TestGithubOrgClient(unittest.TestCase):
             print(github_client.public_repos())
             self.assertEqual(github_client.public_repos(), [
                 "episodes.dart",
-                "kratu",
+                "kratu"
             ])
             mock_result.assert_called_once()
         mock_json.assert_called_once()
