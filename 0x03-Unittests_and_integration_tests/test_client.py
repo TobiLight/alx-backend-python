@@ -94,7 +94,7 @@ class TestGithubOrgClient(unittest.TestCase):
                 "kratu"
             ])
             mock_result.assert_called_once()
-        mock_json.assert_called_once()
+            mock_json.assert_called_once()
 
     @parameterized.expand([
         ({'license': {'key': "bsd-3-clause"}}, "bsd-3-clause", True),
