@@ -33,13 +33,11 @@ class TestGithubOrgClient(unittest.TestCase):
         Tests that the result of _public_repos_url is the expected one based
         on the mocked payload.
         """
-        with patch("client.GithubOrgClient.org", new_callable=PropertyMock,
-                   return_value={"repos_url":
-                                 "https://api.github.com/orgs/google/repos"})\
+        with patch("client.GithubOrgClient.org", new_callable=PropertyMock)\
                 as mock_result:
             github_client = GithubOrgClient("google")
             self.assertEqual(github_client._public_repos_url,
-                             mock_result.return_value['repos_url'])
+                             "https://api.github.com/orgs/google/repos")
 
     @patch("client.get_json")
     def test_public_repos(self, mock_json: MagicMock) -> None:
