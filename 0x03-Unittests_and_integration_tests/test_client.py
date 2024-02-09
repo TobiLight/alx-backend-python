@@ -42,7 +42,7 @@ class TestGithubOrgClient(unittest.TestCase):
                              mock_result.return_value["repos_url"])
 
     @patch("client.get_json")
-    def test_public_repos(self, mock_json: MagicMock) -> None:
+    def test_public_repos(self, mock_json: Mock) -> None:
         """
         Tests that the list of repos is what you expect from the chosen
         payload.
@@ -88,13 +88,13 @@ class TestGithubOrgClient(unittest.TestCase):
         with patch("client.GithubOrgClient._public_repos_url",
                    new_callable=PropertyMock) as mock_result:
             mock_result.return_value = test_payload["repos_url"]
-            github_client = GithubOrgClient("google")
-            self.assertEqual(github_client.public_repos(), [
+            github_client = GithubOrgClient("google").public_repos()
+            self.assertEqual(github_client, [
                 "episodes.dart",
                 "kratu"
             ])
             mock_result.assert_called_once()
-        mock_json.assert_called_once()
+            mock_json.assert_called_once()
 
     @parameterized.expand([
         ({'license': {'key': "bsd-3-clause"}}, "bsd-3-clause", True),
