@@ -88,15 +88,13 @@ class TestGithubOrgClient(unittest.TestCase):
         with patch("client.GithubOrgClient._public_repos_url",
                    new_callable=PropertyMock) as mock_result:
             mock_result.return_value = test_payload["repos_url"]
-            print(mock_result.return_value)
             github_client = GithubOrgClient("google")
             self.assertEqual(github_client.public_repos(), [
                 "episodes.dart",
                 "kratu"
             ])
             mock_result.assert_called_once()
-        mock_json.assert_called_once()
-
+            mock_json.assert_called_once()
 
     @parameterized.expand([
         ({'license': {'key': "bsd-3-clause"}}, "bsd-3-clause", True),
