@@ -33,7 +33,9 @@ class TestGithubOrgClient(unittest.TestCase):
         Tests that the result of _public_repos_url is the expected one based
         on the mocked payload.
         """
-        with patch("client.GithubOrgClient.org", new_callable=PropertyMock)\
+        with patch("client.GithubOrgClient.org", new_callable=PropertyMock,
+                   return_value={"repos_url":
+                                 "https://api.github.com/orgs/google/repos"})\
                 as mock_result:
             github_client = GithubOrgClient("google")
             self.assertEqual(github_client._public_repos_url,
