@@ -51,7 +51,7 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(github_org_client.public_repos(),
                              ["repo1", "repo2"])
             mock_get_json.assert_called_once()
-            mock_public_repos_url.assert_called_once()
+        mock_public_repos_url.assert_called_once()
 
     @parameterized.expand([
         ({'license': {'key': "bsd-3-clause"}}, "bsd-3-clause", True),
