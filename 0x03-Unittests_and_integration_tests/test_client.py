@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # File: test_client.py
 # Author: Oluwatobiloba Light
+"""Testing client module"""
 
 
 from typing import Dict
