@@ -5,7 +5,7 @@
 
 from typing import Dict
 import unittest
-from unittest.mock import MagicMock, Mock, PropertyMock, patch
+from unittest.mock import Mock, PropertyMock, patch
 from parameterized import parameterized, parameterized_class
 from requests import HTTPError
 from client import GithubOrgClient
