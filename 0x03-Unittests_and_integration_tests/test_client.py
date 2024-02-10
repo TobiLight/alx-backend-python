@@ -12,14 +12,6 @@ from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
 
 
-from typing import Dict
-import unittest
-from unittest.mock import Mock, PropertyMock, patch
-from parameterized import parameterized, parameterized_class
-from requests import HTTPError
-from client import GithubOrgClient
-from fixtures import TEST_PAYLOAD
-
 
 class TestGithubOrgClient(unittest.TestCase):
     """Test utils.GithubOrgClient"""
