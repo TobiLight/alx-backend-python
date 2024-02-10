@@ -49,7 +49,8 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(github_client._public_repos_url,
                              mock_result.return_value["repos_url"])
 
-    @patch("client.get_json")
+    @patch("client.get_json",
+           return_value=[{"name": "hello"}, {"name": "world"}])
     def test_public_repos(self, mock_json) -> None:
         """
         Tests that the list of repos is what you expect from the chosen
@@ -92,17 +93,16 @@ class TestGithubOrgClient(unittest.TestCase):
                 },
             ]
         }
-        mock_json.return_value = test_payload['repos']
         with patch("client.GithubOrgClient._public_repos_url",
                    new_callable=PropertyMock) as mock_result:
-            mock_result.return_value = test_payload["repos_url"]
+            # mock_result.return_value = test_payload["repos_url"]
             github_client = GithubOrgClient("google").public_repos()
             self.assertEqual(github_client, [
-                "episodes.dart",
-                "kratu",
+                "hello",
+                "world",
             ])
             mock_result.assert_called_once()
-            mock_json.assert_called_once()
+        mock_json.assert_called_once()
 
     @parameterized.expand([
         ({'license': {'key': "bsd-3-clause"}}, "bsd-3-clause", True),
